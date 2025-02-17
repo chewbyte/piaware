@@ -20,13 +20,13 @@ for aircraft in data['aircraft']:
     altitude = aircraft.get('alt_baro', 'Unknown Altitude')
     heading = aircraft.get('track', 'Unknown Heading')
     squawk = aircraft.get('squawk', 'Unknown Squawk')
-    
+
 
     message += f"**Flight Number:** {flight}\n"
-message += f"**Ground Speed:** {speed} kts\n"
-message += f"**Altitude:** {altitude} ft\n"
-message += f"**Heading:** {heading}°\n"
-message += f"**Squawk:** {squawk}\n"
+    message += f"**Ground Speed:** {speed} kts\n"
+    message += f"**Altitude:** {altitude} ft\n"
+    message += f"**Heading:** {heading}°\n"
+    message += f"**Squawk:** {squawk}\n\n"
 
 
 # Prepare the payload to send to Discord
