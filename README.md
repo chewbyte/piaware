@@ -1,3 +1,3 @@
-Experimenting with piaware webhooks from piaware device into discord.
+Experimenting with webhooks from piaware device into discord using python.
 
-Just a side project, nothing that is service impacting
+Just a side project, nothing that is service impacting.
