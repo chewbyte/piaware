@@ -8,7 +8,7 @@ with open('/run/dump1090-fa/aircraft.json') as f:
     data = json.load(f)
 
 # Prepare the webhook URL (you need to replace this with your actual URL)
-webhook_url = ""
+webhook_url = "https://discord.com/api/webhooks/1340851570824183972/_giSZlZMv-XlaFcPQLHcLSADh3pPlYjn4mqsLuKF1MnUBvoK191LFi3IepOzdeaddM5O"
 
 # Start building the message string
 message = "Aircraft Information:\n"
@@ -25,24 +25,28 @@ for aircraft in data['aircraft']:
     if all(value == 'N/A' for value in [flight, speed, altitude, heading, squawk]):
         continue  # Skip this aircraft if all relevant data is 'N/A'
 
-    # Create the FlightAware URL and disable preview
-    flight_url = f"https://www.flightaware.com/live/flight/{flight}" if flight != 'N/A' else "N/A"
+    # Start aircraft data
+    aircraft_message = ""
 
     # Add flight number only if it's not 'N/A'
     if flight != 'N/A':
-        message += f"**Flight Number:** {flight}\n"
-
-    # Add other fields only if they are not 'N/A'
+        aircraft_message += f"**Flight Number:** {flight}\n"
     if speed != 'N/A':
-        message += f"**Ground Speed:** {speed} kts\n"
+        aircraft_message += f"**Ground Speed:** {speed} kts\n"
     if altitude != 'N/A':
-        message += f"**Altitude:** {altitude} ft\n"
+        aircraft_message += f"**Altitude:** {altitude} ft\n"
     if heading != 'N/A':
-        message += f"**Heading:** {heading}°\n"
+        aircraft_message += f"**Heading:** {heading}°\n"
     if squawk != 'N/A':
-        message += f"**Squawk:** {squawk}\n"
+        aircraft_message += f"**Squawk:** {squawk}\n"
 
-    message += f"**FlightAware URL:** {flight_url}\n\n"
+    # Create the FlightAware URL and disable preview
+    flight_url = f"https://www.flightaware.com/live/flight/{flight}" if flight != 'N/A' else "N/A"
+    if flight_url != 'N/A':
+        aircraft_message += f"**FlightAware URL:** {flight_url}\n"
+
+    # Add the aircraft's details to the main message, separating aircraft with a newline for clarity
+    message += aircraft_message + "\n"  # Add a newline between aircraft information
 
 # Function to split the message into smaller parts if it exceeds 2000 characters
 def split_message(message, max_length=2000):
